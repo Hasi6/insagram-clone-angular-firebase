@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Form} from '@angular/forms';
+import { NgForm } from '@angular/forms';
+import * as firebase from 'firebase';
+import {logger} from 'codelyzer/util/logger';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,8 +15,19 @@ export class SignUpComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(form: Form) {
+  onSubmit(form: NgForm) {
+    const fullname = form.value.fullname;
+    const email = form.value.email;
+    const password = form.value.password;
 
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(userDate => {
+        console.log(userDate);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
+
 
 }
