@@ -8,16 +8,17 @@ import {NgModule} from '@angular/core';
 import {SignUpComponent} from './auth/sign-up/sign-up.component';
 import {LogingComponent} from './auth/loging/loging.component';
 import {LogoutComponent} from './auth/logout/logout.component';
+import {RouteGuard} from './auth/route-guard';
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'allposts', component: AllPostsComponent},
-  {path: 'following', component: FollowingComponent},
-  {path: 'favourite', component: FavouriteComponent},
-  {path: 'myposts', component: MyPostsComponent},
+  {path: '', component: HomeComponent, canActivate: [RouteGuard]},
+  {path: 'allposts', component: AllPostsComponent, canActivate: [RouteGuard]},
+  {path: 'following', component: FollowingComponent, canActivate: [RouteGuard]},
+  {path: 'favourite', component: FavouriteComponent, canActivate: [RouteGuard]},
+  {path: 'myposts', component: MyPostsComponent, canActivate: [RouteGuard]},
   {path: 'signup', component: SignUpComponent},
   {path: 'login', component: LogingComponent},
-  {path: 'logout', component: LogoutComponent},
+  {path: 'logout', component: LogoutComponent, canActivate: [RouteGuard]},
 ];
 
 @NgModule({
