@@ -5,6 +5,9 @@ import {FollowingComponent} from './following/following.component';
 import {FavouriteComponent} from './favourite/favourite.component';
 import {MyPostsComponent} from './my-posts/my-posts.component';
 import {NgModule} from '@angular/core';
+import {SignUpComponent} from './auth/sign-up/sign-up.component';
+import {LogingComponent} from './auth/loging/loging.component';
+import {LogoutComponent} from './auth/logout/logout.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -12,6 +15,9 @@ const appRoutes: Routes = [
   {path: 'following', component: FollowingComponent},
   {path: 'favourite', component: FavouriteComponent},
   {path: 'myposts', component: MyPostsComponent},
+  {path: 'signup', component: SignUpComponent},
+  {path: 'login', component: LogingComponent},
+  {path: 'logout', component: LogoutComponent},
 ];
 
 @NgModule({
