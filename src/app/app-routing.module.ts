@@ -11,7 +11,7 @@ import {LogoutComponent} from './auth/logout/logout.component';
 import {RouteGuard} from './auth/route-guard';
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent, canActivate: [RouteGuard]},
+  {path: '', component: HomeComponent},
   {path: 'allposts', component: AllPostsComponent, canActivate: [RouteGuard]},
   {path: 'following', component: FollowingComponent, canActivate: [RouteGuard]},
   {path: 'favourite', component: FavouriteComponent, canActivate: [RouteGuard]},

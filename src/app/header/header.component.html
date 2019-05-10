@@ -5,16 +5,16 @@
     </div>
     <ul class="nav navbar-nav">
       <li routerLink="active"><a routerLink="/">Home</a></li>
-      <li routerLink="active"><a routerLink="/allposts">All Posts</a></li>
-      <li routerLink="active"><a routerLink="/following">Following</a></li>
-      <li routerLink="active"><a routerLink="/favourite">Favourite</a></li>
-      <li routerLink="active"><a routerLink="/myposts">My Posts</a></li>
+      <li routerLink="active" *ngIf="isLoggedIn"><a routerLink="/allposts">All Posts</a></li>
+      <li routerLink="active" *ngIf="isLoggedIn"><a routerLink="/following">Following</a></li>
+      <li routerLink="active" *ngIf="isLoggedIn"><a routerLink="/favourite">Favourite</a></li>
+      <li routerLink="active" *ngIf="isLoggedIn"><a routerLink="/myposts">My Posts</a></li>
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
       <li routerLink="active"><a routerLink="/signup">Sign Up</a></li>
       <li routerLink="active"><a routerLink="/login">Loging</a></li>
-      <li routerLink="active"><a routerLink="/logout">Logout</a></li>
+      <li routerLink="active"  *ngIf="isLoggedIn"><a routerLink="/logout">Logout</a></li>
     </ul>
   </div>
 </nav>
