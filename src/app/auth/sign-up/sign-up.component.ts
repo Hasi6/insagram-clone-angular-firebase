@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import * as firebase from 'firebase';
-import {logger} from 'codelyzer/util/logger';
 import {NotificationService} from '../../shared/notification.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,7 +11,8 @@ import {NotificationService} from '../../shared/notification.service';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private notifire: NotificationService) { }
+  constructor(private notifire: NotificationService,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -28,6 +29,9 @@ export class SignUpComponent implements OnInit {
         After Verifi your email please sign in to the application`;
         this.notifire.display('success', message);
 
+        this.router.navigate(['/']);
+
+
         return firebase.database().ref('users/' + userData.uid).set({
           email,
           uid: userData.uid,
@@ -37,6 +41,7 @@ export class SignUpComponent implements OnInit {
           .then(() => {
             firebase.auth().signOut();
           });
+
       })
       .catch(err => {
         this.notifire.display('error', err.message);
