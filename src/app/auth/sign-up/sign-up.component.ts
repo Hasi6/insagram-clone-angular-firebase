@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import * as firebase from 'firebase';
 import {logger} from 'codelyzer/util/logger';
+import {NotificationService} from '../../shared/notification.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +11,7 @@ import {logger} from 'codelyzer/util/logger';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor() { }
+  constructor(private notifire: NotificationService) { }
 
   ngOnInit() {
   }
@@ -23,10 +24,22 @@ export class SignUpComponent implements OnInit {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(userData => {
         userData.sendEmailVerification();
-        console.log(userData);
+        const message = `A verification email has been sent to ${email} Please check and follow the instructions,
+        After Verifi your email please sign in to the application`;
+        this.notifire.display('success', message);
+
+        return firebase.database().ref('users/' + userData.uid).set({
+          email,
+          uid: userData.uid,
+          registrationDate: new Date().toString(),
+          name: fullname
+        })
+          .then(() => {
+            firebase.auth().signOut();
+          });
       })
       .catch(err => {
-        console.log(err);
+        this.notifire.display('error', err.message);
       });
   }
 
