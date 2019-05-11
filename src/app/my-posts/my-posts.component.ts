@@ -28,7 +28,7 @@ export class MyPostsComponent implements OnInit {
         .then(data => {
           this.notifier.display('success', 'The Image is Successfully Uploaded!!');
           console.log(data['fileUrl']);
-          this.router.navigate(['/allposts']);
+          this.fire.handleImageUpload(data);
         })
         .catch(err => {
           this.notifier.display('error', err.message);

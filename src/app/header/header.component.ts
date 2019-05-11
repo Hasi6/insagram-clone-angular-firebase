@@ -10,7 +10,7 @@ import {Route, Router} from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  isLoggedIn: boolean = false;
+  isLoggedIn = false;
   name: string;
   email: string;
   uid: any;
@@ -22,24 +22,25 @@ export class HeaderComponent implements OnInit {
 
     this.userService.statusChange.subscribe(userData => {
       if (userData) {
-        this.name = userData.name;
-        this.email = userData.email;
-        this.uid = userData.uid;
+        this.name = firebase.auth().currentUser.displayName;
+        this.email = firebase.auth().currentUser.email;
+        this.uid = firebase.auth().currentUser.uid;
       } else {
-        this.name = null;
-        this.email = null;
-        this.uid = null;
+        this.name = firebase.auth().currentUser.displayName;
+        this.email = firebase.auth().currentUser.email;
+        this.uid = firebase.auth().currentUser.uid;
       }
-    });
+  });
+
 
     firebase.auth().onAuthStateChanged(userData => {
       if (userData && userData.emailVerified) {
         this.isLoggedIn = true;
         const user = this.userService.getProfile();
         if (user && user.name) {
-          this.name = user.name;
-          this.email = user.email;
-          this.uid = user.uid;
+          this.name = firebase.auth().currentUser.displayName;
+          this.email = firebase.auth().currentUser.email;
+          this.uid = firebase.auth().currentUser.uid;
         }
         this.router.navigate(['/myposts']);
       } else {
