@@ -14,7 +14,7 @@
       <span align="center">Posted on: {{imageData.creationDate | date: 'MM/dd/yy'}}</span>
     </div>
 
-    <div *ngIf="imageData.uploadedBy[1] && displayPostedBy" class="text-section-row row2">
+    <div *ngIf="imageData.uploadedBy[0] && displayPostedBy" class="text-section-row row2">
       <span align="center">Posted by: {{imageData.uploadedBy[1]}} </span>
     </div>
 
