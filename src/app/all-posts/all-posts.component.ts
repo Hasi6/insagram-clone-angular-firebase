@@ -70,7 +70,17 @@ export class AllPostsComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         this.notifier.display('error', 'Some Thing Wrong Please Try Again Later');
+      });
+  }
+
+  onFollowClicked(imageData) {
+    this.fire.followUser(imageData.uploadedBy)
+      .then(() => {
+        this.notifier.display('success', 'Now You are Following ' + imageData.uploadedBy[1] + '!!!');
       })
+      .catch(err => {
+        this.notifier.display('error', err);
+      });
   }
 
 }

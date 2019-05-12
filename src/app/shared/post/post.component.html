@@ -14,7 +14,7 @@
       <span align="center">Posted on: {{imageData.creationDate | date: 'MM/dd/yy'}}</span>
     </div>
 
-    <div *ngIf="imageData.uploadedBy && displayPostedBy" class="text-section-row row2">
+    <div *ngIf="imageData.uploadedBy[1] && displayPostedBy" class="text-section-row row2">
       <span align="center">Posted by: {{imageData.uploadedBy[1]}} </span>
     </div>
 
@@ -29,12 +29,12 @@
       </span>
     </div>
 
-<!--    <div class="text-section-row row5 action-row hvr-grow" *ngIf="displayFollowButton">-->
-<!--      <span (click)="onFollowClicked()">-->
-<!--        <span class="glyphicon glyphicon-tags"></span>-->
-<!--        Follow User-->
-<!--      </span>-->
-<!--    </div>-->
+    <div class="text-section-row row5 action-row hvr-grow" *ngIf="!displayFollowButton">
+      <span (click)="onFollowClicked()" align="center">
+        <span class="glyphicon glyphicon-tags"></span>
+        Follow User
+      </span>
+    </div>
   </div>
 
 </div>
