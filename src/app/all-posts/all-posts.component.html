@@ -6,12 +6,13 @@
       <div class="image-container">
         <app-post *ngFor="let post of all"
                   [imageName]="post.data.name"
+                  (favouriteClicked)="onFavouriteClicked($event)"
         >
         </app-post>
       </div>
 
       <div class="col-lg-12 text-left">
-        <button class="btn btn-primary" (click)="onLoadMore()" style="width: 100%">Load More Images</button>
+        <button class="btn btn-primary" (mouseover)="onLoadMore()" style="width: 100%">Load More Images</button>
       </div>
 
     </div>

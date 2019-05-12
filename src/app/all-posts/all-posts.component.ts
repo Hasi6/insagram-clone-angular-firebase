@@ -1,6 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import * as firebase from 'firebase';
 import _ from 'lodash';
+import {FireService} from '../shared/fire.service';
+import {NotificationService} from '../shared/notification.service';
 
 @Component({
   selector: 'app-all-posts',
@@ -12,7 +14,9 @@ export class AllPostsComponent implements OnInit, OnDestroy {
   loadMoreRef: any;
   all: any = [];
 
-  constructor() { }
+  constructor(private fire: FireService,
+              private notifier: NotificationService) { }
+
   onLoadMore() {
 
     // this.limit += 4;
@@ -58,4 +62,15 @@ export class AllPostsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.allRef.off();
   }
+
+  onFavouriteClicked(imageData) {
+    this.fire.handleFavouriteClicked(imageData)
+      .then(data => {
+        this.notifier.display('success', 'Images Has been Added to your Favourite');
+      })
+      .catch(err => {
+        this.notifier.display('error', 'Some Thing Wrong Please Try Again Later');
+      })
+  }
+
 }
